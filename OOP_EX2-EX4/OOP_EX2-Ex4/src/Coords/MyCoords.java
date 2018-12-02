@@ -168,6 +168,6 @@ public class MyCoords implements coords_converter {
 	}
 
 	public static void main(String[] args) {
-
+		System.out.println("fdsf");
 	}
 }
