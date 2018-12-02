@@ -26,16 +26,26 @@ public class Element implements GIS_element {
 	public Geom_element getGeom() {
 		return Geom;
 	}
-
+	
+	
+	
 	@Override
 	public Meta_data getData() {
 		return Data;
 	}
-
+	
+	
+	
 	@Override
 	public void translate(Point3D vec) {
 		
 	}
 
+	public MetaData gatMetaData() {	
+		return Data;
+	}
 	
+	public Point3D getPoint3D() {
+		return Geom;
+	}
 }

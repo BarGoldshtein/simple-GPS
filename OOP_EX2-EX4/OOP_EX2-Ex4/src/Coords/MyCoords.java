@@ -1,9 +1,12 @@
 package Coords;
 
 import Geom.Point3D;
-
 public class MyCoords implements coords_converter {
-
+	
+	public MyCoords() {
+		
+	}
+	
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		try {
@@ -106,7 +109,7 @@ public class MyCoords implements coords_converter {
 			if (isValid_GPS_Point(gps0) && isValid_GPS_Point(gps1)) {
 				AED[2] = distance3d(gps0, gps1);
 
-				double distMZ = Math.abs(gps1.z() - gps0.z());
+				double distMZ = Math.abs(gps0.z()-gps1.z());
 				double eleCalc = distMZ / AED[2];
 
 				if (gps0.z() > gps1.z()) {
@@ -116,7 +119,7 @@ public class MyCoords implements coords_converter {
 				} else {
 					AED[1] = 0;
 				}
-
+				
 				double gps0XRad = Math.toRadians(gps0.x());
 				double gps0YRad = Math.toRadians(gps0.y());
 
@@ -138,7 +141,6 @@ public class MyCoords implements coords_converter {
 				double Azi = (Math.toDegrees((Math.atan2(disY, dphi))) + 360) % 360;
 
 				AED[0] = Azi;
-				System.out.println(AED[0]);
 				return AED;
 			} else {
 				throw new Exception("one of the GPS point is not vaild");
@@ -165,9 +167,5 @@ public class MyCoords implements coords_converter {
 		}
 
 		return true;
-	}
-
-	public static void main(String[] args) {
-		System.out.println("fdsf");
 	}
 }

@@ -123,7 +123,12 @@ public class Layer implements GIS_layer {
 
 	@Override
 	public Meta_data get_Meta_data() {
+		Meta_dataList temp = new Meta_dataList(list);
 		
-		return null;
+		return temp;
+	}
+	
+	public GIS_element get(int i) {
+		return list.get(i);
 	}
 }
