@@ -3,11 +3,23 @@ package GIS;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-
+/**
+ * this class will hold an array of Elements.
+ * @author Hai Hatan and Bar Goldshtein.
+ *
+ */
 public class Layer implements GIS_layer {
 	
 	ArrayList<GIS_element> list;
-
+	
+	public Layer() {
+		list = new ArrayList<>();
+	}
+    /**
+     * this is the basic constructor for layer. 
+     * @param str:the csv string.
+     * @param list: the new arraylist that will hold the elements.
+     */
 	public Layer(ArrayList<String> str) {
 		list = new ArrayList<>();
 
@@ -16,7 +28,11 @@ public class Layer implements GIS_layer {
 		}
 
 	}
-
+    /**
+     * this function will add a new gis element to the list.
+     * @param arg0: the gis element we going to add.
+     * @return true if we sucsess to add or flase if we didnt.
+     */
 	@Override
 	public boolean add(GIS_element arg0) {
 		if (!list.contains(arg0)) {
@@ -25,7 +41,10 @@ public class Layer implements GIS_layer {
 		}
 		return false;
 	}
-
+    /**
+     * this function will add a collection of new gis element to the list.
+     * 
+     */
 	@Override
 	public boolean addAll(Collection<? extends GIS_element> arg0) {
 		if (arg0.isEmpty()) {
@@ -42,7 +61,9 @@ public class Layer implements GIS_layer {
 	public void clear() {
 		list.clear();
 	}
-
+    /** 
+     * this function return true if the list contains the object arg0.
+     */
 	@Override
 	public boolean contains(Object arg0) {
 
@@ -117,8 +138,8 @@ public class Layer implements GIS_layer {
 
 	@Override
 	public <T> T[] toArray(T[] arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return list.toArray(arg0);
 	}
 
 	@Override

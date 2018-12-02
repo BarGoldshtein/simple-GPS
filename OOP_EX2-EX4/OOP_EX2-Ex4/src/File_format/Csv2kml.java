@@ -7,23 +7,47 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Coords.MyCoords;
-
 import java.io.File;
 
 import GIS.Element;
 import GIS.Layer;
-import Geom.Point3D;
 
+/**
+ * this class will handle of files and save the data. its main purpose is to
+ * convert a csv file to kml. sources:
+ * 1.https://stackoverflow.com/questions/47183982/converting-csv-file-to-kml
+ * 2.https://www.tutorialspoint.com/java/io/file_list.htm
+ * 
+ * @author Hai Hatan and Bar Goldshtein.
+ *
+ */
 public class Csv2kml {
 
-	public static ArrayList<String> csvReader(String filepath) {
+	public Csv2kml() {
 
-		String csvFile = filepath;
+	}
+
+	/**
+	 * this function will convert the csv file to a string ArrayList.
+	 * 
+	 * @param filepath: the path to the file.
+	 * @param line:an empty string that we will fill in with lines from the csv file.
+	 * @param temp:an ArrayList that we will fill in string lines from the csv file.
+	 * @param count:we will need to run two round before we get to useable informtion 
+	 * 				that why count must be smaller then 0.
+	 * @return temp.
+	 */
+
+	public ArrayList<String> csvReader(String filepath) {
+        if(!filepath.contains("WigleWifi_")||!filepath.substring(filepath.length()-4).equals("csv")) {
+        	
+        	return null;
+        }
+        
 		String line = "";
 		ArrayList<String> temp = new ArrayList<>();
 		int count = 2;
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
 
 			while ((line = br.readLine()) != null) {
 				if (count <= 0) {
@@ -39,7 +63,7 @@ public class Csv2kml {
 		return temp;
 	}
 
-	static void writeFileKML(Layer a, String fileName) { // https://stackoverflow.com/questions/47183982/converting-csv-file-to-kml
+	static void writeFileKML(Layer a, String fileName) {
 		ArrayList<String> content = new ArrayList<String>();
 		String kmlstart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 				+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n <Document>\r\n" + "";
@@ -66,45 +90,19 @@ public class Csv2kml {
 		}
 	}
 
-	public static void Cvs2KmlConverter(String FileLocation, String outpotName) {
-		ArrayList<String> temp = csvReader("WigleWifi_20171201110209.csv");
+	/**
+	 * this function will convert the csv file into the kml one.
+	 * @param FileLocation:where the csv file is.
+	 * @param outpotName:how do we want to name the kml file.
+	 * @param temp:an arralist that will hold the data from the csv file.
+	 * @param list:will represent the layer of the csv file.
+	 * 
+	 */
+
+	public void Cvs2KmlConverter(String FileLocation, String outpotName) {
+		ArrayList<String> temp = csvReader(FileLocation);
 		Layer list = new Layer(temp);
 		writeFileKML(list, outpotName);
 	}
 
-	public static void CvsFolder(String FolderLocation) {// https://www.tutorialspoint.com/java/io/file_list.htm
-		File f = null;
-		String[] paths;
-		ArrayList<String> temp = new ArrayList<>();
-		try {
-
-			// create new file
-			f = new File(FolderLocation);
-
-			// array of files and directory
-			paths = f.list();
-
-			// for each name in the path array
-			for (String path:paths) {
-				temp.addAll(csvReader(FolderLocation+ "\\" + path));
-			}
-
-			Layer list = new Layer(temp);
-			writeFileKML(list, "all");
-
-		} catch (Exception e) {
-			// if any error occurs
-			e.printStackTrace();
-		}
-	}
-
-	public static void main(String[] args) {
-		Point3D a = new Point3D(2, 2, 8);
-		Point3D b = new Point3D(4, 4, 6);
-		
-		MyCoords t = new MyCoords();
-		double [] test =t.azimuth_elevation_dist(a, b);
-		
-		System.out.println(test[1]);
-		}
 }

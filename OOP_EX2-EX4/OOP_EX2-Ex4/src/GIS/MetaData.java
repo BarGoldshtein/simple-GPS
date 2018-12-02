@@ -7,7 +7,7 @@ public class MetaData implements Meta_data {
 	String MAC;
 	String SSID;
 	String AuthMode;
-	String FirstSeen;
+	long FirstSeen;
 	int Channel;
 	int RSSI;
 	int AccuracyMeters;
@@ -23,7 +23,7 @@ public class MetaData implements Meta_data {
 		this.RSSI = Integer.parseInt(RSSI);
 		this.AccuracyMeters = Integer.parseInt(AccuracyMeters);
 		this.Type = Type;
-/*
+
 		long seenToLong;
 		String longOnlyNum ="0";
 		for (int i = 0; i < FirstSeen.length(); i++) {
@@ -32,13 +32,14 @@ public class MetaData implements Meta_data {
 				longOnlyNum += FirstSeen.charAt(i);
 			}
 		}
-		seenToLong=Long.parseLong(longOnlyNum);*/
-		this.FirstSeen=FirstSeen;
+		seenToLong=Long.parseLong(longOnlyNum);
+		
+		this.FirstSeen=seenToLong;
 	}
 
 	@Override
 	public long getUTC() {
-		return Long.parseLong(FirstSeen);
+		return FirstSeen;
 	}
 
 	@Override
@@ -65,10 +66,6 @@ public class MetaData implements Meta_data {
 		return AuthMode;
 	}
 
-	public String getFirstSeen() {
-		return FirstSeen;
-	}
-
 	public int getChannel() {
 		return Channel;
 	}
@@ -84,4 +81,5 @@ public class MetaData implements Meta_data {
 	public String getType() {
 		return Type;
 	}
+	
 }
