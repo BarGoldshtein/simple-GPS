@@ -8,6 +8,7 @@ import GIS.Layer;
 
 public class MultiCSV {
 	Csv2kml csv;
+
 	/**
 	 * this class will handle of files and save the data. its main purpose is to
 	 * read a folder of csv and convert it to kml:
@@ -22,34 +23,46 @@ public class MultiCSV {
 	}
 
 	public ArrayList<Layer> readFolder(File f2) {
-		ArrayList<Layer> list = new ArrayList<>();
-		File[] files = f2.listFiles();
-		csv = new Csv2kml();
-		for (File temp : files) {
-			if (f2.isDirectory()) {
-				readFolder(f2.getAbsoluteFile());
+		try {
+			ArrayList<Layer> list = new ArrayList<>();
+			File[] files = f2.listFiles();
+			csv = new Csv2kml();
+			for (File temp : files) {
+				if (f2.isDirectory()) {
+					readFolder(f2.getAbsoluteFile());
+				}
+				Layer layer = new Layer();
+				if (Csv2kml.fileType(temp.getName()) == 0) {
+					layer.setLayerType1(csv.csvReader(f2.getAbsolutePath()));
+				} else if (Csv2kml.fileType(temp.getName()) == 1) {
+					layer.setLayerType2(csv.csvReader(f2.getAbsolutePath()));
+				} else if (Csv2kml.fileType(temp.getName()) == -1) {
+					throw new Exception("the file is not in a suppsorted type");
+				}
+				list.add(layer);
 			}
-			Layer layer = new Layer(csv.csvReader(f2.getAbsolutePath()));
-			list.add(layer);	
+			return list;
+		} catch (Exception e) {
+			System.err.println(e);
 		}
-		return list;
+		return null;
 	}
-	
-	public Layer allInOne(ArrayList<Layer> list){
+
+	public Layer allInOne(ArrayList<Layer> list) {
 		Layer allInOne = new Layer();
 		csv = new Csv2kml();
-		for(int i=0; i<list.size(); i++) {
+		for (int i = 0; i < list.size(); i++) {
 			allInOne.addAll(list.get(i));
 		}
 		return allInOne;
 	}
-	
+
 	public void kmlExport(Layer layer, String fileName) {
-		
+
 		Csv2kml.writeFileKML(layer, fileName);
-		
+
 	}
-	
+
 	public void allToOneKml(ArrayList<Layer> list, String fileName) {
 		Layer temp = new Layer();
 		temp = allInOne(list);

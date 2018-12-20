@@ -63,7 +63,7 @@ public class Element implements GIS_element {
 	 * this function will get the data value of the MetaData.
 	 * this allow us to use the function of MetaData
 	 */
-	public MetaData gatMetaData() {	
+	public MetaData getMetaData() {	
 		return Data;
 	}
 	/**

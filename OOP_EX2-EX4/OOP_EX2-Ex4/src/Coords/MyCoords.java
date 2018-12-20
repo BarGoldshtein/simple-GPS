@@ -19,11 +19,11 @@ public class MyCoords implements coords_converter {
 	 * @param yval:value of y.
 	 * @param zval:value of z.
 	 * @param ER:earth raduis.
-	 * @param lon_norm:longitude norm
-	 * @param sinx:taking the different in meters and represent it as sin of the different .
+	 * @param lon_norm:longitude norm.
+	 * @param sinx:taking the different in meters and represent it as sin of the different.
 	 * @param diff_radx:diffrent between gps x and the vector x in radians.
-	 * @param diff_x:diffrent between gps x and the vector x in degree
-	 * @param siny:taking the different in meters and represent it as sin of the different .
+	 * @param diff_x:diffrent between gps x and the vector x in degree.
+	 * @param siny:taking the different in meters and represent it as sin of the different.
 	 * @param diff_rady:diffrent between gps y and the vector y in radians.
 	 * @param diff_y:diffrent between gps y and the vector y in degree.
 	 * @param temp:will hold the new 3dpoint that we looked for.
