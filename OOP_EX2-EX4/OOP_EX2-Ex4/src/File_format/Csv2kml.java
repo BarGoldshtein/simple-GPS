@@ -12,8 +12,10 @@ import com.sun.org.apache.regexp.internal.recompile;
 import java.io.File;
 
 import GIS.Element;
-import GIS.Element2;
+import GIS.GIS_layer;
 import GIS.Layer;
+import Game.PacAndFru;
+import Game.Game;
 
 /**
  * this class will handle of files and save the data. its main purpose is to
@@ -102,7 +104,7 @@ public class Csv2kml {
 			FileWriter fw = new FileWriter(fileName + ".kml");
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (int i = 1; i < a.size(); i++) {
-				Element2 s = (Element2) a.get(i);
+				PacAndFru s = (PacAndFru) a.get(i);
 				String kmlelement = "<Placemark>\n" + "<name>" + s.getMetaData().getType() + "</name>\n" + "<Point>\n"
 						+ "<coordinates>" + s.getPoint3D().y() + ", " + s.getPoint3D().x() + "</coordinates>"
 						+ "</Point>\n" + "</Placemark>\n";
@@ -130,12 +132,11 @@ public class Csv2kml {
 	public void Cvs2KmlConverter(String FileLocation, String outpotName) {
 		try {
 			ArrayList<String> temp = csvReader(FileLocation);
-			Layer list = new Layer();
 			if (fileType(FileLocation) == 0) {
-				list.setLayerType1(temp);
+				Layer list = new Layer(temp);
 				writeFileKML(list, outpotName);
 			} else if (fileType(FileLocation) == 1) {
-				list.setLayerType2(temp);
+				Game list = new Game(temp);
 				writeFileKMLType2(list, outpotName);
 			} else {
 				throw new Exception("the file is no in a sported type");
@@ -154,5 +155,27 @@ public class Csv2kml {
 			return 1;
 		}
 		return -1;
+	}
+	
+	public GIS_layer dataBase(String fileLocation) {
+		int type = fileType(fileLocation);
+		ArrayList<String> temp = new ArrayList<>();
+		temp = csvReader(fileLocation);
+		try {
+			
+			if(type==0) {
+				Layer list = new Layer(temp);
+				return list;
+			} else if (type == 1) {
+				Game game = new Game(temp);
+				return game;
+			} else {
+				throw new Exception("the file is in a unknown format");
+			}
+			
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
 	}
 }

@@ -11,27 +11,21 @@ import java.util.Iterator;
 public class Layer implements GIS_layer {
 	
 	ArrayList<GIS_element> list;
-	
-	public Layer() {
-		list = new ArrayList<>();
-	}
-	
     /**
      * this is the basic constructor for layer. 
      * @param str:the csv string.
      * @param list: the new arraylist that will hold the elements.
      */
-	public void setLayerType1(ArrayList<String> str) {
+	public Layer(ArrayList<String> str) {
+		list = new ArrayList<>();
 		for (int i = 0; i < str.size(); i++) {
 			list.add(new Element(str.get(i)));
 		}
 	}
 	
-	public void setLayerType2(ArrayList<String> str) {
-		for (int i = 1; i < str.size(); i++) {
-			list.add(new Element2(str.get(i)));
-		}
-	}
+
+	
+	
     /**
      * this function will add a new gis element to the list.
      * @param arg0: the gis element we going to add.
