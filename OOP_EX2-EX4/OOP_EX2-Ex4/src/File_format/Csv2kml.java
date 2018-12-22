@@ -48,7 +48,7 @@ public class Csv2kml {
 
 		String line = "";
 		ArrayList<String> temp = new ArrayList<>();
-		temp.add(line);
+		//temp.add(line);
 		int count = 1;
 		try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
 
@@ -137,7 +137,7 @@ public class Csv2kml {
 				writeFileKML(list, outpotName);
 			} else if (fileType(FileLocation) == 1) {
 				Game list = new Game(temp);
-				writeFileKMLType2(list, outpotName);
+			//	writeFileKMLType2(list, outpotName);
 			} else {
 				throw new Exception("the file is no in a sported type");
 			}

@@ -6,44 +6,100 @@ import Geom.Geom_element;
 import Geom.Point3D;
 
 public class PacAndFru implements GIS_element {
-	Point3D Geom;
-	DataPacAndFru Data;	
-	
+	Fruit Fruit;
+	Packman Pac;
+	char type;
 	public PacAndFru (String line) {
-		String [] temp = line.split(",");
-		
-		double x = Double.parseDouble(temp[2]);
-		double y = Double.parseDouble(temp[3]);
-		double z = Double.parseDouble(temp[4]);
-		Geom = new Point3D(x, y, 0);
-		if(temp[0].charAt(0)=='P') {
-		Data = new DataPacAndFru(temp[0], temp[1], temp[5], temp[6]);
+		try {
+		if(line.charAt(0)=='P') {
+			this.Pac = new Packman(line);
+			this.type = 'P';
+		} else if(line.charAt(0) == 'F') {
+			this.Fruit = new Fruit(line);
+			this.type = 'F';
 		} else {
-			Data = new DataPacAndFru(temp[0], temp[1], temp[5], "0");
+			throw new Exception("the csv is not in a sported format.");
+		}
+		}catch (Exception e) {
+			System.err.println(e);
 		}
 		
 	}
 	
+	public PacAndFru(PacAndFru PnF) {
+		if(PnF.getType()==0) {
+			this.Pac=new Packman(PnF.Pac);
+			this.type='P';
+		}else if(PnF.getType()==1) {
+			this.Fruit=new Fruit(PnF.Fruit);
+			this.type='F';
+		}
+		
+		
+		
+		
+	}
 	@Override
 	public Geom_element getGeom() {
-		return Geom;
+		if(getType() == 0) {
+			return Pac.getGeom();
+		} else if (getType()==1) {
+			return Fruit.getGeom();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public Meta_data getData() {
-		return Data;
+		if(getType() == 0) {
+			return Pac.getData();
+		} else if (getType()==1) {
+			return Fruit.getData();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public void translate(Point3D vec) {
-		this.Geom.add(vec);
-	}
+		if(getType() == 0) {
+			this.Pac.Place.add(vec);
+		} else if (getType()==1) {
+			this.Fruit.Place.add(vec);
+		} 
+
+	}	
+		
+		
 	
 	public DataPacAndFru getMetaData() {
-		return Data;
+		if(getType() == 0) {
+			return Pac.getDataPnF();
+		} else if (getType()==1) {
+			return Fruit.getDataPnF();
+		} else {
+			return null;
+		}
 	}
 	
 	public Point3D getPoint3D() {
-		return Geom;
+		if(getType() == 0) {
+			return Pac.Place;
+		} else if (getType()==1) {
+			return Fruit.Place;
+		} else {
+			return null;
+		}
+	}
+	
+	public int getType() {
+		if(this.type == 'P') {
+			return 0;
+		} else if(this.type == 'F') {
+			return 1;    
+		} else {
+			return -1;
+		}
 	}
 }

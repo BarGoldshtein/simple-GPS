@@ -1,5 +1,6 @@
 package Game;
 
+import Coords.MyCoords;
 import GIS.GIS_element;
 import GIS.Meta_data;
 import Geom.Geom_element;
@@ -29,6 +30,20 @@ DataPacAndFru Data;
 		}
 	
 	}
+	
+	public Packman(Packman p) {
+		this.Place=new Point3D(p.Place);
+		String type="";
+		type+=p.Data.getType();
+		String id="";
+		id+=p.Data.getID();
+		String sow="";
+		sow+=p.Data.getSOW();
+		String radius="";
+		radius+=p.Data.getRadius();
+		this.Data=new DataPacAndFru(type, id, sow, radius);
+	}
+	
 	@Override
 	public Geom_element getGeom() {
 
@@ -48,4 +63,19 @@ DataPacAndFru Data;
 
 	}
 	
+	public DataPacAndFru getDataPnF(){
+		return Data;
+		
+	}
+
+	public Point3D getPlace() {
+		return Place;
+	}
+	
+	public double Orientation(Point3D dest) {
+		MyCoords coords = new MyCoords();
+		double [] arr = new double[3];
+		arr = coords.azimuth_elevation_dist(getPlace(), dest);
+		return arr[0];
+	}
 }

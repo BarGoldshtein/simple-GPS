@@ -25,10 +25,30 @@ public class Fruit implements GIS_element {
 			}
 		
 		}
+	
+	 public Fruit(Fruit f) {
+		 this.Place=new Point3D(f.Place);
+			String type="";
+			type+=f.Data.getType();
+			String id="";
+			id+=f.Data.getID();
+			String sow="";
+			sow+=f.Data.getSOW();
+			String radius="";
+			radius+=f.Data.getRadius();
+			this.Data=new DataPacAndFru(type, id, sow, radius);
+		}
+	
+	
+	
 
 	@Override
 	public Geom_element getGeom() {
 
+		return Place;
+	}
+
+	public Point3D getPlace() {
 		return Place;
 	}
 
@@ -43,5 +63,10 @@ public class Fruit implements GIS_element {
 		
 		this.Place.add(vec);
 
+	}
+	
+	public DataPacAndFru getDataPnF(){
+		return Data;
+		
 	}
 }
