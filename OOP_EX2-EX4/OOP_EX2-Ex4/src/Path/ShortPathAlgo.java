@@ -13,6 +13,9 @@ public class ShortPathAlgo {
 	
 	public Path[] ShrotPath(Game g) {
 		Path [] routes = new Path[g.getPackmanNum()];
+		for (int i = 0; i<routes.length; i++) {
+			routes[i] = new Path();
+		}
 		ArrayList<PacAndFru> pacs = new ArrayList<>();
 		ArrayList<PacAndFru> fru = new ArrayList<>();
 		int flag=0;
@@ -36,9 +39,13 @@ public class ShortPathAlgo {
 						theClosest=j;
 					}
 				}
+				
 				routes[i].add(fru.get(theClosest));
 				pacs.set(i, fru.get(theClosest));
 				fru.remove(theClosest);
+				if(fru.isEmpty()) {
+					break;
+				}
 			}
 		}
 		return routes;

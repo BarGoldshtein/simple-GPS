@@ -136,8 +136,8 @@ public class Game implements GIS_layer {
 
 	@Override
 	public Meta_data get_Meta_data() {
-		Meta_dataList temp = new Meta_dataList(FruitsAndPacks.);
-		return temp;
+		//Meta_dataList temp = new Meta_dataList(FruitsAndPacks.);
+		return null;
 	}
 
 	

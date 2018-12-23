@@ -10,5 +10,14 @@ public class Paths {
 		Paths = new Path[game.getPackmanNum()];
 		Paths = s.ShrotPath(game);
 	}
+	
+	public int size() {
+		return Paths.length;
+	}
+	
+	public Path get(int i) {
+		return Paths[i];
+	}
+	
 
 }

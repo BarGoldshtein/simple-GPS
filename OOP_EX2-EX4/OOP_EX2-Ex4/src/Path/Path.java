@@ -39,4 +39,8 @@ public class Path {
 		Path.add(pnf);
 		this.pathLength=pathLength();
 	}
+	
+	public int size () {
+		return Path.size();
+	}
 }

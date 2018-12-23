@@ -92,33 +92,7 @@ public class Csv2kml {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void writeFileKMLType2(Layer a, String fileName) {
-		ArrayList<String> content = new ArrayList<String>();
-		String kmlstart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-				+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n <Document>\r\n" + "";
-		content.add(kmlstart);
 
-		String kmlend = " </Document>\r\n" + " </kml>";
-		try {
-			FileWriter fw = new FileWriter(fileName + ".kml");
-			BufferedWriter bw = new BufferedWriter(fw);
-			for (int i = 1; i < a.size(); i++) {
-				PacAndFru s = (PacAndFru) a.get(i);
-				String kmlelement = "<Placemark>\n" + "<name>" + s.getMetaData().getType() + "</name>\n" + "<Point>\n"
-						+ "<coordinates>" + s.getPoint3D().y() + ", " + s.getPoint3D().x() + "</coordinates>"
-						+ "</Point>\n" + "</Placemark>\n";
-				content.add(kmlelement);
-			}
-
-			content.add(kmlend);
-			String csv = content.toString().replaceAll(",", "").replace("[", "").replace("]", "");
-			bw.write(csv);
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	/**
 	 * this function will convert the csv file into the kml one.
 	 * 
