@@ -136,10 +136,23 @@ public class Game implements GIS_layer {
 
 	@Override
 	public Meta_data get_Meta_data() {
-		Meta_dataList temp = new Meta_dataList(FruitsAndPacks);
+		Meta_dataList temp = new Meta_dataList(FruitsAndPacks.);
 		return temp;
 	}
 
+	
+	public int getPackmanNum() {
+		return PackmanNum;
+	}
+
+	public int getFruitsNum() {
+		return FruitsNum;
+	}
+	
+	
+	public ArrayList<PacAndFru> getFruitsAndPacks() {
+		return FruitsAndPacks;
+	}
 
 	public void csvWriter(String name, Game game) throws FileNotFoundException {
 		ArrayList<PacAndFru> PnF = new ArrayList<>(game.FruitsAndPacks);
@@ -219,5 +232,6 @@ public class Game implements GIS_layer {
 		}
 		
 	}
+	
 
 }
