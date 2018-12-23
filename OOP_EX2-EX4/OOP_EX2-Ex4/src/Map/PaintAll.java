@@ -1,5 +1,9 @@
 package Map;
-
+/**
+ * this class will paint all the fruit and packmans on the man
+ * 
+ * @author Bar Goldshtein ,Hai Hatan and Michael Shapira
+ */
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Panel;
@@ -11,6 +15,9 @@ import javax.imageio.ImageIO;
 public class PaintAll extends Panel{
 	Pixel [] locations;
 	
+	 
+    
+     
 	String ImgLocation;
 	public PaintAll (Pixel [] dots, String ImgLocation) {
 		this.ImgLocation=ImgLocation;

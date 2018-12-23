@@ -1,5 +1,10 @@
 package Map;
-
+/**
+ * this class will hold the pixel point 
+ * and represent it.
+ * 
+ * @author Bar Goldshtein ,Hai Hatan and Michael Shapira
+ */
 public class Pixel {
 	
 	private int x;

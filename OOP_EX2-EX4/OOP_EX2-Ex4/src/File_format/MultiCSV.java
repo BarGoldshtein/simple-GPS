@@ -31,14 +31,8 @@ public class MultiCSV {
 				if (f2.isDirectory()) {
 					readFolder(f2.getAbsoluteFile());
 				}
-				Layer layer = new Layer();
-				if (Csv2kml.fileType(temp.getName()) == 0) {
-					layer.setLayerType1(csv.csvReader(f2.getAbsolutePath()));
-				} else if (Csv2kml.fileType(temp.getName()) == 1) {
-					layer.setLayerType2(csv.csvReader(f2.getAbsolutePath()));
-				} else if (Csv2kml.fileType(temp.getName()) == -1) {
-					throw new Exception("the file is not in a suppsorted type");
-				}
+				Layer layer = new Layer(csv.csvReader(f2.getAbsolutePath()));
+
 				list.add(layer);
 			}
 			return list;

@@ -23,6 +23,10 @@ public class Layer implements GIS_layer {
 		}
 	}
 	
+	public Layer() {
+		list=new ArrayList<>();
+	}
+	
 
 	
 	
